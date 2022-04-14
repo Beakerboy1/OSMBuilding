@@ -11,5 +11,8 @@
   "devDependencies" : {
     "eslint": "^8.13",
     "jest": "^27.4.7"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
