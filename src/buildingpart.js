@@ -10,6 +10,7 @@ import {
 
 import {PyramidGeometry} from 'pyramid';
 import {RampGeometry} from 'ramp';
+import {WedgeGeometry} from 'wedge';
 import {BuildingShapeUtils} from './extras/BuildingShapeUtils.js';
 /**
  * An OSM Building Part
