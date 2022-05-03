@@ -195,7 +195,7 @@ class BuildingPart {
   createRoof() {
     var way = this.way;
     var material;
-
+    var roof;
     if (this.options.roof.shape === 'flat') {
       // do nothing
       return;
@@ -207,7 +207,7 @@ class BuildingPart {
       // Adjust the dome height if needed.
       geometry.scale(1, this.options.roof.height / R, 1);
       material = BuildingPart.getRoofMaterial(this.way);
-      const roof = new Mesh( geometry, material );
+      roof = new Mesh( geometry, material );
       const elevation = this.options.building.height - this.options.roof.height;
       const center = BuildingShapeUtils.center(this.shape);
       roof.rotation.x = -Math.PI;
@@ -221,7 +221,7 @@ class BuildingPart {
       const geometry = new RampGeometry(this.shape, options);
 
       material = BuildingPart.getRoofMaterial(this.way);
-      const roof = new Mesh( geometry, material );
+      roof = new Mesh( geometry, material );
       roof.rotation.x = -Math.PI / 2;
       roof.position.set( 0, this.options.building.height - this.options.roof.height, 0);
     } else if (this.options.roof.shape === 'onion') {
@@ -245,7 +245,7 @@ class BuildingPart {
       const geometry = new PyramidGeometry(this.shape, options);
 
       material = BuildingPart.getRoofMaterial(this.way);
-      const roof = new Mesh( geometry, material );
+      roof = new Mesh( geometry, material );
       roof.rotation.x = -Math.PI / 2;
       roof.position.set( 0, this.options.building.height - this.options.roof.height, 0);
     } else {
