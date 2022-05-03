@@ -56,6 +56,9 @@ class BuildingPart {
 
   fullXmlData;
 
+  // The unique OSM ID of the object.
+  id;
+
   // THREE.Mesh
   parts = [];
   /**
@@ -195,6 +198,7 @@ class BuildingPart {
 
     if (this.options.roof.shape === 'flat') {
       // do nothing
+      return;
     } else if (this.options.roof.shape === 'dome') {
     //   find largest circle within the way
     //   R, x, y
@@ -208,7 +212,6 @@ class BuildingPart {
       const center = BuildingShapeUtils.center(this.shape);
       roof.rotation.x = -Math.PI;
       roof.position.set(center[0], elevation, -1 * center[1]);
-      this.roof = roof;
     } else if (this.options.roof.shape === 'skillion') {
       const options = {
         angle: (360 - this.options.roof.direction) / 360 * 2 * Math.PI,
@@ -221,7 +224,6 @@ class BuildingPart {
       const roof = new Mesh( geometry, material );
       roof.rotation.x = -Math.PI / 2;
       roof.position.set( 0, this.options.building.height - this.options.roof.height, 0);
-      this.roof = roof;
     } else if (this.options.roof.shape === 'onion') {
       const R = BuildingShapeUtils.calculateRadius(this.shape);
       const geometry = new SphereGeometry( R, 100, 100, 0, 2 * Math.PI, 0, 2.53 );
@@ -234,8 +236,6 @@ class BuildingPart {
       const center = BuildingShapeUtils.center(this.shape);
       roof.rotation.x = -Math.PI;
       roof.position.set(center[0], elevation, -1 * center[1]);
-      this.roof = roof;
-    } else if (this.options.roof.shape === 'gabled') {
     } else if (this.options.roof.shape === 'pyramidal') {
       const center = BuildingShapeUtils.center(this.shape);
       const options = {
@@ -248,8 +248,11 @@ class BuildingPart {
       const roof = new Mesh( geometry, material );
       roof.rotation.x = -Math.PI / 2;
       roof.position.set( 0, this.options.building.height - this.options.roof.height, 0);
-      this.roof = roof;
+    } else {
+      return;
     }
+    roof.name = this.id;
+    this.roof = roof;
   }
 
   getAttribute(key) {
