@@ -124,7 +124,7 @@ function createScene() {
 }
 
 function showHideDiv(object) {
-  mesh = scene.getObjectByName(object.id);
+  const mesh = scene.getObjectByName(object.id);
   mesh.visible = false;
 }
 
