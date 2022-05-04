@@ -6,6 +6,7 @@ import {
   AmbientLight,
   HemisphereLight,
   DirectionalLight,
+  WireframeGeometry,
 } from 'three';
 import {OrbitControls} from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
 import {Building} from './building.js';
@@ -60,7 +61,8 @@ function init() {
       for (let i = 0; i < info.parts.length; i++) {
         const part = info.parts[i];
         const folder = gui.addFolder(part.id);
-        folder.add(part.building, 'height', 0, 100 ).step(.1).onChange(generateGeometry);
+        folder.add(part.building, 'height', 0, 100 ).step(.1);
+        //.onChange(generateGeometry);
       }
     }
   });
@@ -144,7 +146,7 @@ function resize() {
 function updateGroupGeometry( mesh, geometry ) {
   mesh.children[ 0 ].geometry.dispose();
   mesh.children[ 1 ].geometry.dispose();
-  mesh.children[ 0 ].geometry = new WireframeGeometry( geometry );
+  mesh.children[ 0 ].geometry = new WireframeGeometry(geometry);
   mesh.children[ 1 ].geometry = geometry;
   // these do not update nicely together if shared
 }
